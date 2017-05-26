@@ -9,8 +9,7 @@ import android.widget.EditText;
 public class MainActivity extends AppCompatActivity {
     private EditText etName;
     private EditText etAddress;
-    public static final String KEY_NAME = "name";
-    public static final String KEY_ADDRESS = "address";
+    public static final String KEY_USER = "user";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,12 +20,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void submit(View view) {
-        Intent intent = new Intent(MainActivity.this, HomeActivity.class);
         User user = new User();
         user.setName(etName.getText().toString());
         user.setAddress(etAddress.getText().toString());
-        intent.putExtra(KEY_NAME, etName.getText().toString());
-        intent.putExtra(KEY_ADDRESS, etAddress.getText().toString());
-        startActivity(intent);
+        user.setEmail("em.wildan.es@gmail.com");
+        user.setGender("Laki-laki");
+
+        Intent intent = new Intent();
+        setResult(HomeActivity.RESULT_CODE, intent);
+        intent.putExtra(KEY_USER, user);
+        finish();
     }
 }
